@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+    ServerAdmin   contact@%%domain%%
+    ServerAlias   *.%%domain%%
+
+    SuexecUserGroup %%user%% %%user%%
+    
+    DirectoryIndex index.php
+    VirtualDocumentRoot /home/%%user%%/sd/%1/www/
+    
+    UseCanonicalName Off
+    
+    <Directory /home/%%user%%/sd>
+        Options -Indexes FollowSymLinks -MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    LogLevel warn
+    ErrorLog ${APACHE_LOG_DIR}/sd.%%domain%%.error.log
+    CustomLog ${APACHE_LOG_DIR}/sd.%%domain%%.access.log combined
+</VirtualHost>
+

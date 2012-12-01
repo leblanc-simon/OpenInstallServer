@@ -1,0 +1,49 @@
+<VirtualHost *:80>
+    ServerAdmin contact@%%domain%%
+    ServerName %%domain%%
+    ServerAlias www.%%domain%%
+    DocumentRoot /home/%%user%%/www
+    
+    SuexecUserGroup %%user%% %%user%%
+    
+    <Directory /home/%%user%%/www/>
+        Options -Indexes FollowSymLinks -MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    LogLevel warn
+    ErrorLog ${APACHE_LOG_DIR}/%%domain%%.error.log
+    CustomLog ${APACHE_LOG_DIR}/%%domain%%.access.log combined
+    
+    # Configuration awstats
+    Alias /awstatsclasses   "/usr/share/awstats/classes/"
+    Alias /awstatscss       "/usr/share/awstats/css/"
+    Alias /awstats-icon     "/usr/share/awstats/icon/"
+    
+    ScriptAlias /cgi-bin    /home/%%user%%/cgi-bin/
+
+    <Directory /home/%%user%%/cgi-bin/>
+        <IfModule mod_rewrite.c>
+                RewriteEngine On
+                RewriteBase /
+                RewriteCond %{HTTP_HOST} ^www.%%domain%%$ [NC]
+                RewriteRule ^(.*)$ http://%%domain%%/cgi-bin/$1 [L,R=301]
+        </IfModule>
+        DirectoryIndex awstats.pl
+        UseCanonicalName off
+        AuthName "Statistiques awstats"
+        AuthType Basic
+        AuthUserFile /home/%%user%%/.htpasswd
+        Options +ExecCGI
+        AllowOverride None
+        <Limit GET>
+            require valid-user
+        </Limit>
+        <LimitExcept GET>
+            deny from all
+        </LimitExcept>
+    </Directory>
+</VirtualHost>
+

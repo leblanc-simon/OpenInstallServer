@@ -1,0 +1,4 @@
+#!/bin/bash
+MAILTO=""
+
+/root/travaux/deploy.sh > /dev/null

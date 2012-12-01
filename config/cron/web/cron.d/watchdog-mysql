@@ -1,0 +1,2 @@
+# Monitoring MySQL
+*/15 * * * * root /root/travaux/utils/watchdog_mysql.sh > /dev/null 2>&1
