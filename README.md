@@ -72,10 +72,26 @@ Cela permettra de placer les différents fichiers de configuration, d'ajouter le
 Redémarrer la machine pour que toutes les configurations soient prise en compte (ou redémarrer les différents services un par un)
 
 
+Déploiement de configuration
+----------------------------
+
+Lors de la première execution du script deploy.sh, celui-ci va se mettre dans le cron.daily. Cela signifie que chaque jour, le script de déploiement sera executé. Cela permet de déployer automatiquement des mises à jour de configuration sur tous les serveurs uniquement en mettant à jour son dépôt OpenInstallServer.
+
+Il existe 3 types de dossier de configuration :
+* common : le dossier de la configuration commune à tous les serveurs
+* openerp ou web : le dossier de la configuration spécifique à un type de serveur
+* $(hostname) : le dossier de la configuration spécifique à un serveur
+
+Pour le déploiement des clés publique SSH, cela fonctionne par utilisateur. Dans le dossier "ssh", il y a un sous-dossier par utilisateur unix. Si vous souhaitez vous connecter sur l'utilisateur "toto" avec votre clé SSH, il faut alors créer un dossier "toto" et mettre votre clé SSH publique dans ce dossier.
+
+Il est également possible de limiter le déploiement d'une clé à un seul serveur. Pour cela, au lieu de mettre votre clé publique SSH dans le dossier portant le nom de l'utilisateur, il faut créer un sous-dossier du nom du hostname (sous dossier au dossier portant le nom d'utilisateur) pour lequel vous souhaitez ajouter votre clé publique SSH.
+
+
 Outils
 ======
 
-Divers outils sont présents sur le serveur pour faciliter l'administration. Les scripts se trouve dans /root/travaux/utils/
+Divers outils sont présents sur le serveur pour faciliter l'administration. Les scripts se trouvent dans /root/travaux/utils/
+
 Une aide est disponible pour chaque outil en faisant ./[outil.sh] -h
 
 
