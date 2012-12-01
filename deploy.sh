@@ -55,6 +55,15 @@ logInfo "Mise a jour des fichiers de configuration iptables"
 update_iptables
 if [ $? -eq 0 ]; then
     logInfo "Mise a jour des fichiers de configuration iptables : OK"
+    
+    # Redémarrage d'iptables après la configuration
+    logInfo "Redemarrage d'iptables"
+    /etc/init.d/iptables.sh restart
+    if [ $? -eq 0 ]; then
+        logInfo "Redemarrage d'iptables : OK"
+    else
+        logError "Erreur lors du redemarrage d'iptables"
+    fi
 fi
 
 # - Fail2ban
