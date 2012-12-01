@@ -62,7 +62,10 @@ Pour activer les quotas, il faut :
 * activer les quotas avec : # quotacheck -vagum && quotaon -avug
 
 Il faut enfin penser à déployer la configuration du serveur. Pour cela, il suffit d'executer le script :
-# /root/travaux/deploy.sh
+
+```bash
+/root/travaux/deploy.sh
+```
 
 Cela permettra de placer les différents fichiers de configuration, d'ajouter les clés SSH par défaut et de mettre en place le script iptables.sh au démarrage
 
