@@ -336,6 +336,13 @@ function update_suphp()
 function update_cron_for()
 {
     local basedir="$1"
+    
+    ls ${basedir}/* 2&>1 > /dev/null
+    if [ $? -ne 0 ]; then
+        # Il n'y a pas de fichier à copier
+        return 0
+    fi
+    
     cp -fr ${basedir}/* /etc/
     if [ $? -ne 0 ]; then
         logError "echec de la copie du dossier ${basedir}"
