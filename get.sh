@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "${UID}" -ne "0" ]; then
+if [ ${UID} -ne 0 ]; then
     echo "You must be root. No root has small dick :-)"
     exit 1
 fi
