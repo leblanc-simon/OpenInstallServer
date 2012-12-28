@@ -104,7 +104,7 @@ function getIpAddress()
     fi
     
     while [ -z "${ip_address}" ]; do
-        echo -e "Adresses IP a utiliser (separer par des espaces) : \c"
+        echo -e "Adresses IP a utiliser pour authoriser l'acces de base ssh et autres (separer par des espaces) : \c"
         read ip_address
     done
     
