@@ -125,7 +125,6 @@ fi
 # Génération du template apache2
 #
 cat ${APACHE_WWW_TPL} | sed "s/%%domain%%/${FLAGS_website}/g" | sed "s/%%user%%/${FLAGS_user}/g" > /etc/apache2/sites-available/0_${FLAGS_website}
-cat ${APACHE_SD_TPL} | sed "s/%%domain%%/${FLAGS_website}/g" | sed "s/%%user%%/${FLAGS_user}/g" > /etc/apache2/sites-available/1_${FLAGS_website}
 cat ${AWSTATS_TPL} | sed "s/%%domain%%/${FLAGS_website}/g" | sed "s/%%user%%/${FLAGS_user}/g" > /etc/awstats/awstats.${FLAGS_website}.conf
 
 #
@@ -178,7 +177,6 @@ fi
 # Activation des sites
 #
 a2ensite 0_${FLAGS_website}
-a2ensite 1_${FLAGS_website}
 
 #
 # Mise en place des statistiques

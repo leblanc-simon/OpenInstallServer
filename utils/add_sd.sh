@@ -21,6 +21,8 @@ SCRIPT_DIRECTORY=`( cd -P $(dirname $0); pwd)`
 MYSQL_BIN=`which mysql`
 MYSQL_PASS=`cat /root/.pdb`
 
+APACHE_SD_TPL="${SCRIPT_DIRECTORY}/template/sd"
+
 #
 # Ecrit une chaine sur la sortie d'erreur
 #
@@ -83,6 +85,13 @@ mkdir -p /home/${username}/sd/${sd_website}/www
 chown ${username}:${username} /home/${username}/sd
 chown -R ${username}:${username} /home/${username}/sd/${sd_website}
 chmod 755 -R /home/${username}/sd/${sd_website}
+
+#
+# Génération du template apache2
+#
+cat ${APACHE_SD_TPL} | sed "s/%%base_website%%/${base_website}/g" | sed "s/%%user%%/${username}/g" | sed "s/%%sd_website%%/${sd_website}/g" > /etc/apache2/sites-available/${sd_website}.${base_website}
+
+a2ensite ${sd_website}.${base_website}
 
 
 #

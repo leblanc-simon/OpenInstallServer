@@ -1,0 +1,20 @@
+<VirtualHost *:80>
+    ServerAdmin   contact@%%base_website%%
+    ServerAlias   %%sd_website%%.%%base_website%%
+
+    SuexecUserGroup %%user%% %%user%%
+    
+    DirectoryIndex index.php
+    DocumentRoot /home/%%user%%/sd/%%sd_website%%/www/
+    
+    <Directory /home/%%user%%/sd/%%sd_website%%/www>
+        Options -Indexes FollowSymLinks -MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    LogLevel warn
+    ErrorLog ${APACHE_LOG_DIR}/%%sd_website%%.%%base_website%%.error.log
+    CustomLog ${APACHE_LOG_DIR}/%%sd_website%%.%%base_website%%.access.log combined
+</VirtualHost>
